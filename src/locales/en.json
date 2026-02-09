@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "start": "Home",
+    "howTo": "How to Start",
+    "jobs": "Job Desc",
+    "video": "Video",
+    "scoutZone": "Scout Zone"
+  },
+  "hero": {
+    "tag": "Recruitment Open: Season 2024/25",
+    "title1": "Be faster",
+    "title2": "than TV broadcast.",
+    "desc": "Join an elite team of sports scouts. Collect data directly from the stadium and beat the market by crucial seconds.",
+    "btnApply": "Become a Scout",
+    "btnVideo": "Watch Video"
+  },
+  "liveWidget": {
+    "liveTag": "LIVE",
+    "intensity": "High Intensity",
+    "status": "ACTIVE"
+  },
+  "video": {
+    "tag": "See how we work",
+    "title": "Emotions straight from the pitch",
+    "desc": "Watch a short video about what a scout's work looks like at the stadium and why it's worth joining our community."
+  },
+  "howTo": {
+    "title": "How to start",
+    "subtitle": "your journey?",
+    "desc": "A simple path from registration to your first live match.",
+    "steps": {
+      "1": { "title": "Registration", "desc": "Create an account on our platform. This is the first step to joining." },
+      "2": { "title": "Training", "desc": "Read the manuals and complete a training match in our online system." },
+      "3": { "title": "Verification", "desc": "A short online call to check your knowledge after training." },
+      "4": { "title": "Your Debut", "desc": "Pick up your accreditation and report your first match live!" }
+    },
+    "cta": "Register Now"
+  },
+  "jobs": {
+    "title": "Job",
+    "subtitle": "Description",
+    "cards": {
+      "1": { "title": "What does a scout do?", "desc": "Your task is to attend the match and report its progress using our application." },
+      "2": { "title": "Which sports?", "desc": "Our biggest demand is for football, but you can choose from 10 different sports." },
+      "3": { "title": "Who pays for tickets?", "desc": "You have two options. Receive accreditation (free entry) OR pay for the ticket and we refund the costs." }
+    }
+  },
+  "stats": {
+    "countries": "Countries",
+    "disciplines": "Disciplines",
+    "matches": "Matches/mo",
+    "support": "Support"
+  },
+  "cta": {
+    "title": "Get in the Game",
+    "desc": "The recruitment process is simple. Fill out the form, pass a short sports knowledge test, and go to your first match.",
+    "btn": "Start Recruitment"
+  },
+  "contact": {
+    "header": {
+      "title1": "Join the game.",
+      "title2": "Become a Scout.",
+      "desc": "This is a job for true enthusiasts. Watch matches live, collect data, and earn money from your love for sports."
+    },
+    "info": {
+      "global": { "title": "Global Work", "desc": "We operate in over 40 countries. Work locally." },
+      "email": { "title": "Recruitment Contact", "desc": "jobs@livesportevents.co.uk" }
+    },
+    "form": {
+      "name": "Full Name",
+      "name_ph": "John Doe",
+      "email": "Email",
+      "email_ph": "john@example.com",
+      "country": "Country",
+      "country_ph": "United Kingdom",
+      "city": "City",
+      "city_ph": "London",
+      "subject": "Subject",
+      "subject_ph": "Application for position...",
+      "source": "How did you find us?",
+      "message": "Message (Optional)",
+      "message_ph": "Briefly describe your experience with sports...",
+      "btn": "Send Application",
+      "options": {
+        "google": "Google Search",
+        "social": "Social Media",
+        "job_ad": "Job Advertisement",
+        "referral": "Referral",
+        "other": "Other"
+      }
+    },
+    "success": {
+      "title": "Application Sent!",
+      "desc": "We will contact you shortly."
+    }
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "portal": "Scout Portal"
+  }
+}

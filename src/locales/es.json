@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "start": "Inicio",
+    "howTo": "Cómo empezar",
+    "jobs": "Descripción",
+    "video": "Vídeo",
+    "scoutZone": "Zona Scout"
+  },
+  "hero": {
+    "tag": "Reclutamiento Abierto: Temporada 2024/25",
+    "title1": "Sé más rápido",
+    "title2": "que la transmisión de TV.",
+    "desc": "Únete a un equipo de élite de ojeadores deportivos. Recopila datos directamente desde el estadio y gana al mercado por segundos clave.",
+    "btnApply": "Ser Scout",
+    "btnVideo": "Ver Vídeo"
+  },
+  "liveWidget": {
+    "liveTag": "EN VIVO",
+    "intensity": "Alta Intensidad",
+    "status": "ACTIVO"
+  },
+  "video": {
+    "tag": "Mira cómo trabajamos",
+    "title": "Emociones desde el campo",
+    "desc": "Mira un video corto sobre cómo es el trabajo de un ojeador en el estadio y por qué vale la pena unirse a nuestra comunidad."
+  },
+  "howTo": {
+    "title": "Cómo",
+    "subtitle": "empezar?",
+    "desc": "Un camino sencillo desde el registro hasta tu primer partido en vivo.",
+    "steps": {
+      "1": { "title": "Registro", "desc": "Crea una cuenta en nuestra plataforma. Es el primer paso para unirte." },
+      "2": { "title": "Entrenamiento", "desc": "Lee los manuales y completa un partido de entrenamiento en nuestro sistema online." },
+      "3": { "title": "Verificación", "desc": "Una breve llamada online para verificar tus conocimientos después del entrenamiento." },
+      "4": { "title": "Tu Debut", "desc": "¡Recoge tu acreditación e informa tu primer partido en vivo!" }
+    },
+    "cta": "Regístrate Ahora"
+  },
+  "jobs": {
+    "title": "Descripción",
+    "subtitle": "del Trabajo",
+    "cards": {
+      "1": { "title": "¿Qué hace un scout?", "desc": "Tu tarea es asistir al partido e informar sobre su progreso usando nuestra aplicación." },
+      "2": { "title": "¿Qué deportes?", "desc": "La mayor demanda es fútbol, pero puedes elegir entre 10 deportes diferentes." },
+      "3": { "title": "¿Quién paga las entradas?", "desc": "Tienes dos opciones. Recibes acreditación (entrada gratis) O pagas la entrada y te reembolsamos los costos." }
+    }
+  },
+  "stats": {
+    "countries": "Países",
+    "disciplines": "Disciplinas",
+    "matches": "Partidos/mes",
+    "support": "Soporte"
+  },
+  "cta": {
+    "title": "Entra en el Juego",
+    "desc": "El proceso de reclutamiento es simple. Rellena el formulario, pasa una breve prueba de conocimientos deportivos y ve a tu primer partido.",
+    "btn": "Iniciar Reclutamiento"
+  },
+  "contact": {
+    "header": {
+      "title1": "Únete al juego.",
+      "title2": "Sé un Scout.",
+      "desc": "Es un trabajo para verdaderos entusiastas. Mira partidos en vivo, recopila datos y gana dinero con tu amor por el deporte."
+    },
+    "info": {
+      "global": { "title": "Trabajo Global", "desc": "Operamos en más de 40 países. Trabaja localmente." },
+      "email": { "title": "Contacto de Reclutamiento", "desc": "jobs@livesportevents.co.uk" }
+    },
+    "form": {
+      "name": "Nombre completo",
+      "name_ph": "Juan Pérez",
+      "email": "Correo electrónico",
+      "email_ph": "juan@example.com",
+      "country": "País",
+      "country_ph": "España",
+      "city": "Ciudad",
+      "city_ph": "Madrid",
+      "subject": "Asunto",
+      "subject_ph": "Solicitud para el puesto...",
+      "source": "¿Cómo nos encontraste?",
+      "message": "Mensaje (Opcional)",
+      "message_ph": "Describe brevemente tu experiencia con el deporte...",
+      "btn": "Enviar Solicitud",
+      "options": {
+        "google": "Búsqueda de Google",
+        "social": "Redes Sociales",
+        "job_ad": "Anuncio de trabajo",
+        "referral": "Recomendación",
+        "other": "Otro"
+      }
+    },
+    "success": {
+      "title": "¡Solicitud Enviada!",
+      "desc": "Nos pondremos en contacto contigo pronto."
+    }
+  },
+  "footer": {
+    "privacy": "Política de Privacidad",
+    "terms": "Términos y Condiciones",
+    "portal": "Portal del Scout"
+  }
+}

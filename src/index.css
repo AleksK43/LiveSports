@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dodaj to, aby wymusić ciemny motyw na całej stronie */
+@layer base {
+  body {
+    @apply bg-brand-dark text-brand-text antialiased;
+  }
+}

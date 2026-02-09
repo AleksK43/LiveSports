@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "start": "Start",
+    "howTo": "Jak zacząć",
+    "jobs": "Opis Pracy",
+    "video": "Wideo",
+    "scoutZone": "Strefa Skauta"
+  },
+  "hero": {
+    "tag": "Nabór otwarty: Sezon 2024/25",
+    "title1": "Bądź szybszy",
+    "title2": "niż transmisja TV.",
+    "desc": "Dołącz do elitarnego zespołu skautów sportowych. Zbieraj dane bezpośrednio ze stadionu i wyprzedzaj rynek o kluczowe sekundy.",
+    "btnApply": "Zostań Skautem",
+    "btnVideo": "Zobacz Wideo"
+  },
+  "liveWidget": {
+    "liveTag": "NA ŻYWO",
+    "intensity": "Wysoka Intensywność",
+    "status": "AKTYWNY"
+  },
+  "video": {
+    "tag": "Zobacz jak pracujemy",
+    "title": "Emocje prosto z boiska",
+    "desc": "Zobacz krótki materiał o tym, jak wygląda praca skauta na stadionie i dlaczego warto dołączyć do naszej społeczności."
+  },
+  "howTo": {
+    "title": "Jak zacząć",
+    "subtitle": "przygodę?",
+    "desc": "Prosta ścieżka od rejestracji do Twojego pierwszego meczu na żywo.",
+    "steps": {
+      "1": { "title": "Rejestracja", "desc": "Załóż konto na naszej platformie. To pierwszy krok do dołączenia." },
+      "2": { "title": "Szkolenie", "desc": "Przeczytaj instrukcje i wykonaj mecz treningowy w systemie online." },
+      "3": { "title": "Weryfikacja", "desc": "Krótka rozmowa online sprawdzająca Twoją wiedzę po szkoleniu." },
+      "4": { "title": "Twój Debiut", "desc": "Odbierz akredytację i zaraportuj swój pierwszy mecz na żywo!" }
+    },
+    "cta": "Zarejestruj się teraz"
+  },
+  "jobs": {
+    "title": "Opis",
+    "subtitle": "Pracy",
+    "cards": {
+      "1": { "title": "Co robi skaut?", "desc": "Twoim zadaniem jest udział w meczu i raportowanie jego przebiegu za pomocą naszej aplikacji." },
+      "2": { "title": "Jakie dyscypliny?", "desc": "Największe zapotrzebowanie mamy na piłkę nożną, ale możesz wybierać spośród 10 różnych sportów." },
+      "3": { "title": "Kto płaci za bilety?", "desc": "Masz dwie opcje. Skaut otrzymuje akredytację (za darmo) LUB płacisz za bilet, a my zwracamy koszty." }
+    }
+  },
+  "stats": {
+    "countries": "Krajów",
+    "disciplines": "Dyscyplin",
+    "matches": "Meczy/msc",
+    "support": "Wsparcie"
+  },
+  "cta": {
+    "title": "Wejdź do gry",
+    "desc": "Proces rekrutacji jest prosty. Wypełnij formularz, przejdź krótki test wiedzy sportowej i jedź na swój pierwszy mecz.",
+    "btn": "Rozpocznij Rekrutację"
+  },
+  "contact": {
+    "header": {
+      "title1": "Dołącz do gry.",
+      "title2": "Zostań Skautem.",
+      "desc": "To praca dla prawdziwych pasjonatów. Oglądaj mecze na żywo, zbieraj dane i zarabiaj na swojej miłości do sportu."
+    },
+    "info": {
+      "global": { "title": "Praca Globalna", "desc": "Działamy w ponad 40 krajach. Pracuj lokalnie." },
+      "email": { "title": "Kontakt Rekrutacyjny", "desc": "jobs@livesportevents.co.uk" }
+    },
+    "form": {
+      "name": "Imię i Nazwisko",
+      "name_ph": "Jan Kowalski",
+      "email": "Email",
+      "email_ph": "jan@example.com",
+      "country": "Kraj",
+      "country_ph": "Polska",
+      "city": "Miasto",
+      "city_ph": "Warszawa",
+      "subject": "Temat",
+      "subject_ph": "Aplikacja na stanowisko...",
+      "source": "Jak nas znalazłeś?",
+      "message": "Wiadomość (Opcjonalnie)",
+      "message_ph": "Opisz krótko swoje doświadczenie ze sportem...",
+      "btn": "Wyślij Aplikację",
+      "options": {
+        "google": "Wyszukiwarka Google",
+        "social": "Social Media",
+        "job_ad": "Ogłoszenie o pracę",
+        "referral": "Polecenie",
+        "other": "Inne"
+      }
+    },
+    "success": {
+      "title": "Aplikacja wysłana!",
+      "desc": "Skontaktujemy się z Tobą wkrótce."
+    }
+  },
+  "footer": {
+    "privacy": "Polityka Prywatności",
+    "terms": "Regulamin",
+    "portal": "Portal Skauta"
+  }
+}
