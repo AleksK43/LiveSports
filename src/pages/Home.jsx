@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next'; // <--- IMPORT HOOKA TŁUMACZEŃ
+import { useTranslation } from 'react-i18next';
+// 1. IMPORT HELMET (DODANE)
+import { Helmet } from 'react-helmet-async';
 import { 
   Trophy, Globe, ChevronRight, PlayCircle, Target, Zap, 
   Youtube, Ticket, ClipboardList, Activity, 
@@ -31,7 +33,7 @@ const itemVariants = {
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { t, i18n } = useTranslation(); // Inicjalizacja tłumaczeń
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -39,7 +41,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Funkcja zmiany języka
   const changeLang = (lang) => {
     i18n.changeLanguage(lang);
   };
@@ -59,7 +60,7 @@ const Navbar = () => {
           <span>LIVE<span className="text-brand-accent">SPORT</span>EVENTS</span>
         </div>
         
-        {/* Menu Desktop - Teraz używa t() */}
+        {/* Menu Desktop */}
         <div className="hidden md:flex space-x-8 text-sm font-medium text-slate-400">
           <a href="#start" className="hover:text-brand-accent transition-colors uppercase tracking-wide text-xs">{t('nav.start')}</a>
           <a href="#jak-zaczac" className="hover:text-brand-accent transition-colors uppercase tracking-wide text-xs">{t('nav.howTo')}</a>
@@ -120,7 +121,6 @@ const JobCard = ({ icon: Icon, title, desc }) => (
 const HomePage = () => {
   const { t } = useTranslation();
 
-  // Dane steps pobieramy z tłumaczeń
   const steps = [
     { id: 1, icon: UserPlus, title: t('howTo.steps.1.title'), desc: t('howTo.steps.1.desc') },
     { id: 2, icon: BookOpen, title: t('howTo.steps.2.title'), desc: t('howTo.steps.2.desc') },
@@ -130,6 +130,26 @@ const HomePage = () => {
 
   return (
     <div className="bg-brand-dark min-h-screen font-sans text-brand-text selection:bg-brand-accent selection:text-white overflow-x-hidden">
+      
+      {/* 2. SEO SECTION (DODANE) */}
+      <Helmet>
+        <title>{t('seo.home.title')}</title>
+        <meta name="description" content={t('seo.home.description')} />
+        <meta name="keywords" content={t('seo.home.keywords')} />
+        
+        {/* Open Graph / Facebook - ważne dla udostępniania w social mediach */}
+        <meta property="og:title" content={t('seo.home.title')} />
+        <meta property="og:description" content={t('seo.home.description')} />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={t('seo.home.title')} />
+        <meta name="twitter:description" content={t('seo.home.description')} />
+        
+        <link rel="canonical" href="https://twoja-domena.pl/" />
+      </Helmet>
+
       <Navbar />
 
       {/* HERO SECTION */}
@@ -153,6 +173,7 @@ const HomePage = () => {
               {t('hero.tag')}
             </motion.div>
 
+            {/* H1 jest kluczowe dla SEO - zostaje tak jak było */}
             <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
               {t('hero.title1')} <br/> 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-fuchsia-300">
@@ -225,8 +246,8 @@ const HomePage = () => {
             <div className="relative pt-[56.25%]">
               <iframe 
                 className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=SimulatedVideoID" 
-                title="YouTube video player" 
+                src="https://www.youtube.com/embed/ZWmhcn9axiQ" 
+                title={t('video.title')} // Dodano title dla accessibility/SEO
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowFullScreen
@@ -390,8 +411,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Musisz zaktualizować też ContactSection.jsx w ten sam sposób (używając t()), ale tutaj dla przykładu strona Home jest gotowa */}
+      
+      {/* SEKCJA KONTAKTOWA (Zostawiona oryginalna nazwa importu) */}
       <ContactSection />
 
       <footer className="bg-brand-dark py-12 border-t border-slate-800 text-sm">

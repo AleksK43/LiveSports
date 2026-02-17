@@ -1,4 +1,11 @@
 {
+  "seo": {
+    "home": {
+      "title": "LiveSports - Praca w Sporcie, Scouting i Wydarzenia na Żywo",
+      "description": "Dołącz do LiveSportEvents! Zostań skautem sportowym, relacjonuj mecze na żywo i pracuj przy największych wydarzeniach. Sprawdź oferty i aplikuj już dziś.",
+      "keywords": "praca w sporcie, skaut sportowy, relacje na żywo, praca dodatkowa, piłka nożna, scouting, zbieranie danych, praca na stadionie"
+    }
+  },
   "nav": {
     "start": "Start",
     "howTo": "Jak zacząć",

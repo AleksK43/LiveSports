@@ -1,4 +1,11 @@
 {
+  "seo": {
+    "home": {
+      "title": "LiveSports - Empleos Deportivos, Scouting y Eventos en Vivo",
+      "description": "¡Únete a LiveSportEvents! Conviértete en ojeador deportivo, reporta partidos en vivo y trabaja en los mayores eventos. Revisa nuestras ofertas y postula hoy.",
+      "keywords": "trabajo en deportes, ojeador deportivo, scout deportivo, reportes en vivo, trabajo a tiempo parcial, fútbol, scouting, recopilación de datos"
+    }
+  },
   "nav": {
     "start": "Inicio",
     "howTo": "Cómo empezar",

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Mail, Send, CheckCircle, Globe, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Send, CheckCircle, Globe, AlertCircle, Loader2, XCircle } from 'lucide-react';
 import DOMPurify from 'dompurify'; // Biblioteka do sanityzacji XSS
 
-
+// Komponenty pomocnicze InputGroup i SelectGroup pozostają bez zmian...
 const InputGroup = ({ label, type = "text", placeholder, name, value, onChange, error, required }) => (
   <div className="flex flex-col space-y-2">
     <label className="text-sm font-medium text-brand-muted uppercase tracking-wider flex justify-between">
       <span>{label} {required && <span className="text-brand-accent">*</span>}</span>
-      {/* Wyświetlanie błędu */}
       {error && <span className="text-red-500 text-xs normal-case flex items-center gap-1"><AlertCircle size={12} /> {error}</span>}
     </label>
     <input
@@ -18,7 +17,6 @@ const InputGroup = ({ label, type = "text", placeholder, name, value, onChange, 
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      // Dodajemy warunkowe style dla błędu (czerwona ramka)
       className={`w-full bg-white border rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-1 transition-all duration-300 placeholder:text-gray-400 ${
         error 
           ? 'border-red-500 focus:border-red-500 focus:ring-red-500' 
@@ -53,12 +51,9 @@ const SelectGroup = ({ label, optionKeys, name, value, onChange, t }) => (
   </div>
 );
 
-// --- GŁÓWNY KOMPONENT ---
-
 export const ContactSection = () => {
   const { t } = useTranslation();
   
-  // Stan formularza
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -67,34 +62,27 @@ export const ContactSection = () => {
     subject: '',
     source: 'google',
     message: '',
-    // HONEYPOT: Pole pułapka dla botów (ukryte w CSS)
     _gotcha: '' 
   });
 
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
+  const [serverErrorMessage, setServerErrorMessage] = useState(''); // Stan dla komunikatu błędu z serwera
 
   const sourceOptions = ['google', 'social', 'job_ad', 'referral', 'other'];
 
-  // --- LOGIKA WALIDACJI ---
   const validate = (data) => {
     let tempErrors = {};
-    
-    // Walidacja imienia (min 2 znaki, bez znaków specjalnych typu <> )
     if (!data.fullname.trim()) tempErrors.fullname = "To pole jest wymagane.";
     else if (data.fullname.length < 2) tempErrors.fullname = "Minimum 2 znaki.";
     
-    // Walidacja Email (Regex)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!data.email) tempErrors.email = "Email jest wymagany.";
     else if (!emailRegex.test(data.email)) tempErrors.email = "Niepoprawny format email.";
 
-    // Walidacja reszty pól
     if (!data.country.trim()) tempErrors.country = "Kraj jest wymagany.";
     if (!data.city.trim()) tempErrors.city = "Miasto jest wymagane.";
     if (!data.subject.trim()) tempErrors.subject = "Temat jest wymagany.";
-    
-    // Walidacja długości wiadomości (max 5000 znaków - ochrona przed Buffer Overflow na backendzie)
     if (data.message.length > 5000) tempErrors.message = "Wiadomość jest zbyt długa.";
 
     setErrors(tempErrors);
@@ -103,36 +91,27 @@ export const ContactSection = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    // Czyścimy błąd edytowanego pola
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: null }));
-    }
-
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: null }));
+    if (status === 'error') setStatus('idle'); // Reset statusu błędu przy edycji
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setServerErrorMessage(''); // Czyścimy stare błędy serwera
 
-    // 1. SPRAWDZENIE HONEYPOT (Ochrona przed botami)
+    // 1. HONEYPOT
     if (formData._gotcha !== '') {
-      // Jeśli bot wypełnił ukryte pole, udajemy sukces, ale nic nie wysyłamy
-      console.warn("Bot detected via honeypot.");
       setStatus('success'); 
       return;
     }
 
-    // 2. WALIDACJA
-    if (!validate(formData)) {
-      // Jeśli błędy, przerywamy
-      return;
-    }
+    // 2. WALIDACJA FRONTEND
+    if (!validate(formData)) return;
 
     setStatus('submitting');
 
-    // 3. SANITYZACJA (Ochrona przed XSS)
-    // Czyścimy wszystkie stringi z potencjalnego kodu HTML/JS
+    // 3. SANITYZACJA DANYCH
     const sanitizedData = {
       fullname: DOMPurify.sanitize(formData.fullname),
       email: DOMPurify.sanitize(formData.email),
@@ -144,30 +123,32 @@ export const ContactSection = () => {
     };
 
     try {
-      // 4. WYSYŁKA (Symulacja lub prawdziwe API)
-      
-      // Tutaj normalnie byłby: await fetch('https://twoje-api.com/contact', { ... })
-      // Symulujemy opóźnienie sieciowe:
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      /* PRZYKŁAD PRAWDZIWEGO FETCH (odkomentuj jak będziesz miał endpoint):
-      const response = await fetch('https://api.livesportevents.co.uk/contact', {
+      // 4. KOMUNIKACJA Z SERWEREM
+      const response = await fetch('/contact.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(sanitizedData)
       });
-      if (!response.ok) throw new Error('Server error');
-      */
 
+      const result = await response.json(); // Pobieramy odpowiedź JSON z PHP
+
+      if (!response.ok) {
+        // Jeśli serwer zwrócił błąd (np. 400 lub 500), rzucamy wyjątek z wiadomością z PHP
+        throw new Error(result.message || 'Wystąpił błąd serwera.');
+      }
+
+      // SUKCES
       setStatus('success');
       setFormData({ fullname: '', email: '', country: '', city: '', subject: '', source: 'google', message: '', _gotcha: '' });
       
-      // Reset statusu po 5 sekundach
+      // Automatyczny powrót do formularza po 5 sekundach
       setTimeout(() => setStatus('idle'), 5000);
 
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error("Błąd wysyłki:", error);
       setStatus('error');
+      // Ustawiamy treść błędu do wyświetlenia
+      setServerErrorMessage(error.message || "Nie udało się połączyć z serwerem.");
     }
   };
 
@@ -179,7 +160,7 @@ export const ContactSection = () => {
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           
-          {/* LEWA STRONA (Bez zmian) */}
+          {/* LEWA STRONA - INFO */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -244,79 +225,24 @@ export const ContactSection = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                {/* HONEYPOT FIELD - Niewidoczne dla usera, widoczne dla bota */}
+                {/* HONEYPOT */}
                 <div style={{ display: 'none', opacity: 0, position: 'absolute', left: '-9999px' }} aria-hidden="true">
-                  <input 
-                    type="text" 
-                    name="_gotcha" 
-                    tabIndex="-1" 
-                    value={formData._gotcha} 
-                    onChange={handleChange} 
-                    autoComplete="off"
-                  />
+                  <input type="text" name="_gotcha" tabIndex="-1" value={formData._gotcha} onChange={handleChange} autoComplete="off"/>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <InputGroup 
-                    label={t('contact.form.name')} 
-                    name="fullname" 
-                    value={formData.fullname}
-                    onChange={handleChange}
-                    error={errors.fullname}
-                    placeholder={t('contact.form.name_ph')} 
-                    required 
-                  />
-                  <InputGroup 
-                    label={t('contact.form.email')} 
-                    type="email" 
-                    name="email" 
-                    value={formData.email}
-                    onChange={handleChange}
-                    error={errors.email}
-                    placeholder={t('contact.form.email_ph')} 
-                    required 
-                  />
+                  <InputGroup label={t('contact.form.name')} name="fullname" value={formData.fullname} onChange={handleChange} error={errors.fullname} placeholder={t('contact.form.name_ph')} required />
+                  <InputGroup label={t('contact.form.email')} type="email" name="email" value={formData.email} onChange={handleChange} error={errors.email} placeholder={t('contact.form.email_ph')} required />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <InputGroup 
-                    label={t('contact.form.country')} 
-                    name="country" 
-                    value={formData.country}
-                    onChange={handleChange}
-                    error={errors.country}
-                    placeholder={t('contact.form.country_ph')} 
-                    required 
-                  />
-                  <InputGroup 
-                    label={t('contact.form.city')} 
-                    name="city" 
-                    value={formData.city}
-                    onChange={handleChange}
-                    error={errors.city}
-                    placeholder={t('contact.form.city_ph')} 
-                    required 
-                  />
+                  <InputGroup label={t('contact.form.country')} name="country" value={formData.country} onChange={handleChange} error={errors.country} placeholder={t('contact.form.country_ph')} required />
+                  <InputGroup label={t('contact.form.city')} name="city" value={formData.city} onChange={handleChange} error={errors.city} placeholder={t('contact.form.city_ph')} required />
                 </div>
 
-                <InputGroup 
-                  label={t('contact.form.subject')} 
-                  name="subject" 
-                  value={formData.subject}
-                  onChange={handleChange}
-                  error={errors.subject}
-                  placeholder={t('contact.form.subject_ph')} 
-                  required 
-                />
+                <InputGroup label={t('contact.form.subject')} name="subject" value={formData.subject} onChange={handleChange} error={errors.subject} placeholder={t('contact.form.subject_ph')} required />
 
-                <SelectGroup 
-                  label={t('contact.form.source')} 
-                  name="source" 
-                  value={formData.source}
-                  onChange={handleChange}
-                  optionKeys={sourceOptions}
-                  t={t}
-                />
+                <SelectGroup label={t('contact.form.source')} name="source" value={formData.source} onChange={handleChange} optionKeys={sourceOptions} t={t} />
 
                 <div className="flex flex-col space-y-2">
                   <label className="text-sm font-medium text-brand-muted uppercase tracking-wider flex justify-between">
@@ -352,10 +278,18 @@ export const ContactSection = () => {
                   )}
                 </button>
                 
+                {/* SEKCJJA KOMUNIKATU BŁĘDU */}
                 {status === 'error' && (
-                  <div className="text-center text-red-500 text-sm mt-2">
-                    Wystąpił błąd podczas wysyłania. Spróbuj ponownie.
-                  </div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 p-4 bg-red-500/10 border border-red-500/50 rounded-lg flex items-center space-x-3 text-red-500"
+                  >
+                    <XCircle className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm font-medium">
+                      {serverErrorMessage || "Wystąpił nieoczekiwany błąd. Sprawdź połączenie i spróbuj ponownie."}
+                    </span>
+                  </motion.div>
                 )}
               </form>
             )}

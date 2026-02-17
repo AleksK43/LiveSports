@@ -1,4 +1,11 @@
 {
+  "seo": {
+    "home": {
+      "title": "LiveSports - Sports Jobs, Scouting & Live Events",
+      "description": "Join LiveSportEvents! Become a sports scout, report matches live, and work at the biggest sporting events. Check out our job offers and apply today.",
+      "keywords": "sports jobs, sports scout, live reporting, part-time job, football, scouting, data collection, match reporter"
+    }
+  },
   "nav": {
     "start": "Home",
     "howTo": "How to Start",
